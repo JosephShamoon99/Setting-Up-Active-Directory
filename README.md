@@ -32,25 +32,52 @@ This tutorial outlines the implementation of on-premises Active Directory within
 <h2>Deployment and Configuration Steps</h2>
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img width="100%" height="100%"alt="screenshot 1" src="https://github.com/user-attachments/assets/f5caae3e-f2f6-4225-8311-7f4632c5e09d"/>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+The first thing that we will have to do is create a resource group and create a virtual network inside of it. It is important for all the resources we create to be placed in the same region.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img width="100%" height="100%" alt="screenshot 2" src="https://github.com/user-attachments/assets/8a9d14e4-221a-432d-881e-4baa25bb31c8"/>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Next, we will need a domain controller. The domain controller is where we will actually deploy 
+Active Directory. Other computers will connect to this to join our domain. To create a domain controller we will need to create a virtual machine for it. We will need to place the virtual machine in the resource group that we created and place it on the network we created. We also have to use windows server 2022 for its image. 
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img width="100%" height="100%" alt="screenshot 3" src="https://github.com/user-attachments/assets/1a28f0c1-2395-4e79-8821-5d3cadd50776"/>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Once we have our domain controller created, we can go ahead and create a client VM to connect to our domain controller. Like always, make sure it is in the same resource group, virtual network and region as everything else. 
 </p>
-<br />
+<br /> 
+
+<p>
+<img width="100%" height="100%" alt="screenshot 4" src="https://github.com/user-attachments/assets/709bcfde-b78b-485b-9983-9050c3bf350b"/>
+</p>
+<p>
+Next, we will have to make the private IP address of our domain controller static. 
+This is because our client will use the domain controller as its DNS server as well. To change the IP address of the domain controller to static, click on the domain controller VM > networking > networking settings > click on the link to the VM's NIC settings > click on the VM's IP > select static and save. 
+</p>
+<br /> 
+
+<p>
+<img width="100%" height="100%" alt="screenshot 5" src="https://github.com/user-attachments/assets/1a28f0c1-2395-4e79-8821-5d3cadd50776"/>
+</p>
+<p>
+Once we have our domain controller created, we can go ahead and create a client VM to connect to our domain controller. Like always, make sure it is in the same resource group, virtual network and region as everything else. 
+</p>
+<br /> 
+
+<p>
+<img width="100%" height="100%" alt="screenshot 3" src="https://github.com/user-attachments/assets/1a28f0c1-2395-4e79-8821-5d3cadd50776"/>
+</p>
+<p>
+Once we have our domain controller created, we can go ahead and create a client VM to connect to our domain controller. Like always, make sure it is in the same resource group, virtual network and region as everything else. 
+</p>
+<br /> 
+
