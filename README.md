@@ -2,8 +2,10 @@
 <img src="https://i.imgur.com/pU5A58S.png" alt="Microsoft Active Directory Logo"/>
 </p>
 
-<h1>On-premises Active Directory Deployed in the Cloud (Azure)</h1>
-This tutorial outlines the implementation of on-premises Active Directory within Azure Virtual Machines.<br />
+<h1>Setting Up Active Directory (Azure)</h1>
+Active Directory is a service that allows you to manage thoundas of users, computers and resources on a Windows Domain Network from one central loaction. 
+This is a very important tool for IT professionals to know how to use. In this tutorial, I will show you how to set up an Active Directory Domain in Mircosoft Azure.
+<br /> 
 
 <h2>Environments and Technologies Used</h2>
 
@@ -19,9 +21,9 @@ This tutorial outlines the implementation of on-premises Active Directory within
 
 <h2>High-Level Deployment and Configuration Steps</h2>
 
-- Deploy and configure Active Directory 
-- Create dummy accounts to populate our domain 
-- Manage those dummy accounts using Active Directory
+- Create a virtual machine to act as our domain controller with Windows server 2022 
+- Deploy Active Directory on the domain controller
+- Create anohter virtual machine as a client to connect to the domain controller we created
 
 <h2>Deployment and Configuration Steps</h2>
 
@@ -81,7 +83,7 @@ VM > networking > networking settings > click on the link to the VM's NIC settin
 <img width="100%" height="100%" alt="snapshot 7" src="https://github.com/user-attachments/assets/1585dbd8-244d-4787-8fbd-aa52ce735bb3"/>
 </p>
 <p>
-Next, we will have to make sure the client can connect to the domain controller. Restart the client then log in to it. Open up powershell and ping the private IP address of the domain controller 
+Next, we will have to make sure the client can connect to the domain controller. Restart the client then login to it. Open up powershell and ping the private IP address of the domain controller 
 </p>
 <br />  
 
@@ -98,7 +100,7 @@ The DNS server is the private IP address of the domain controller.
 <img width="1425" height="751" alt="Snapshot 9" src="https://github.com/user-attachments/assets/c731b5ec-eadf-40d8-8e9c-668f6c8c0cd5" />
 </p>
 <p>
-Now we will have to install Active Directory on our domain control. Go to the virtual machine with Windows Server 2022 and go to the server manager. 
+Now we will have to deploy Active Directory on our domain controller. Go to the virtual machine with Windows Server 2022 and go to the server manager. 
 </p>
 <br />  
 
@@ -124,7 +126,7 @@ Continue to click next on everything until Active directory is installed
 </p>
 <p>
 Now that we have Active Directory installed on our virtual machine, now we must promote 
-the virtual machine to an actual domain controller. Go to  the server manager and click on 
+the virtual machine to an actual domain controller. Go to the server manager and click on 
 the flag and then click "promote this server to domain controller" 
 </p>
 <br />  
@@ -255,6 +257,13 @@ For this lab, we create an OU called _CLINETS and place Client 1 in there.
 </p>
 <br />  
 
+<p>
+There you have it. We have our Active Direcorty Domain up and running on Azure. To see how we can actually manage accounts using this 
+Active Diretory Domain, go to this tutorial next:  
+  
+[Active Directory: Managing Accounts With Active Directory](https://github.com/JosephShamoon99/Managing-Accounts-With-Active-Directory-)
+</p>
+<br />  
 
 
 
