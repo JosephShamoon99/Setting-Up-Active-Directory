@@ -19,13 +19,13 @@ This is a very important tool for IT professionals to know how to use. In this t
 - Windows Server 2022
 - Windows 11
 
-<h2>High-Level Deployment and Configuration Steps</h2>
+<h2>High-Level Steps</h2>
 
 - Create a virtual machine to act as our domain controller with Windows server 2022 
 - Deploy Active Directory on the domain controller
 - Create anohter virtual machine as a client to connect to the domain controller we created
 
-<h2>Deployment and Configuration Steps</h2>
+<h2>Active Directory Deployment and Configuration</h2>
 
 <p>
 <img width="100%" height="100%"alt="screenshot 1" src="https://github.com/user-attachments/assets/f5caae3e-f2f6-4225-8311-7f4632c5e09d"/>
