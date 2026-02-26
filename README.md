@@ -3,8 +3,8 @@
 </p>
 
 <h1>Setting Up Active Directory (Azure)</h1>
-Active Directory is a service that allows you to manage thoundas of users, computers and resources on a Windows Domain Network from one central loaction. 
-This is a very important tool for IT professionals to know how to use. In this tutorial, I will show you how to set up an Active Directory Domain in Mircosoft Azure.
+Active Directory is a service that allows you to manage thousands of users, computers and resources on a Windows domain network from one central location. 
+This is a very important tool for IT professionals to know how to use. In this tutorial, I will show you how to set up an Active Directory domain in Mircosoft Azure.
 <br /> 
 
 <h2>Environments and Technologies Used</h2>
@@ -21,9 +21,9 @@ This is a very important tool for IT professionals to know how to use. In this t
 
 <h2>High-Level Steps</h2>
 
-- Create a virtual machine to act as our domain controller with Windows server 2022 
+- Create a virtual machine to act as our domain controller with Windows Server 2022 
 - Deploy Active Directory on the domain controller
-- Create anohter virtual machine as a client to connect to the domain controller we created
+- Create anohter virtual machine to act as a client that will connect to our domain controller
 
 <h2>Active Directory Deployment and Configuration</h2>
 
@@ -40,7 +40,7 @@ The first thing that we will have to do is create a resource group and create a 
 </p>
 <p>
 Next, we will need a domain controller. The domain controller is where we will actually deploy 
-Active Directory. Other computers will connect to this to join our domain. To create a domain controller we will need to create a virtual machine for it. We will need to place the virtual machine in the resource group that we created and place it on the network we created. We also have to use windows server 2022 for its image. 
+Active Directory. Other computers will connect to the domain controller to join our domain. To create a domain controller we will need to create a virtual machine for it. We will need to place the virtual machine in the resource group that we created and place it on the network we created. We also have to use Windows Server 2022 for its image. 
 </p>
 <br />
 
@@ -65,7 +65,7 @@ This is because our client will use the domain controller as its DNS server as w
 <img width="401" height="456" alt="snapshot 5" src="https://github.com/user-attachments/assets/b8473e71-a0b8-4985-841a-95f73fb262f8" />
 </p>
 <p>
-For testing purposes, we will need to disable the firewall on the domain controller VM. To disable the firewall, log in to the domain controller VM using RDP. Once you are logged in, right click the windows icon > select start >  type wf.msc > windows firewall defender properties > turn all firewall states to off on all tabs > select okay.  
+For testing purposes, we will need to disable the firewall on the domain controller VM. To disable the firewall, log in to the domain controller VM using RDP. Once you are logged in, right click the Windows icon > select start >  type wf.msc > Windows Firewall Defender properties > turn all firewall states to off on all tabs > select okay.  
 </p>
 <br /> 
 
@@ -73,8 +73,8 @@ For testing purposes, we will need to disable the firewall on the domain control
 <img width="100%" height="100%" alt="snapshot 6" src="https://github.com/user-attachments/assets/3574ae1e-b3e1-4a84-bb19-69917d902d71"/>
 </p>
 <p>
-Next, We will have to set our client VM's DNS server to our domain controller's private IP 
-address. First, get the private IP address of the domain controller. Then click on the client  
+Next, we will have to set our client VM's DNS server to our domain controller's private IP 
+address. First, get the private IP address of the domain controller. Then, click on the client  
 VM > networking > networking settings > click on the link to the VM's NIC settings > DNS servers > select custom > enter the domain controllers private IP address and click save. 
 </p>
 <br />  
@@ -83,7 +83,7 @@ VM > networking > networking settings > click on the link to the VM's NIC settin
 <img width="100%" height="100%" alt="snapshot 7" src="https://github.com/user-attachments/assets/1585dbd8-244d-4787-8fbd-aa52ce735bb3"/>
 </p>
 <p>
-Next, we will have to make sure the client can connect to the domain controller. Restart the client then login to it. Open up powershell and ping the private IP address of the domain controller 
+Next, we will have to make sure the client can connect to the domain controller. Restart the client then log in to it. Open up powershell and ping the private IP address of the domain controller. 
 </p>
 <br />  
 
@@ -91,7 +91,7 @@ Next, we will have to make sure the client can connect to the domain controller.
 <img width="1106" height="626" alt="Snapshot 8" src="https://github.com/user-attachments/assets/412281dc-0b3d-4bb4-abb9-befbd19280a8" />
 </p>
 <p>
-Once we confirm we are able to connect to the domain controller run ipconfig /all to confirm 
+Once we confirm we are able to connect to the domain controller, run ipconfig /all to confirm 
 The DNS server is the private IP address of the domain controller. 
 </p>
 <br />  
@@ -100,7 +100,7 @@ The DNS server is the private IP address of the domain controller.
 <img width="1425" height="751" alt="Snapshot 9" src="https://github.com/user-attachments/assets/c731b5ec-eadf-40d8-8e9c-668f6c8c0cd5" />
 </p>
 <p>
-Now we will have to deploy Active Directory on our domain controller. Go to the virtual machine with Windows Server 2022 and go to the server manager. 
+Now we will have to deploy Active Directory on our domain controller. Log in to the domain controller virtual machine and go to the server manager. 
 </p>
 <br />  
 
@@ -109,7 +109,7 @@ Now we will have to deploy Active Directory on our domain controller. Go to the 
 </p>
 <p>
 Click "add roles and features". Click next on everything until you get to "server roles" and select 
-Active Directory Domain Services  
+Active Directory Domain Services.  
 </p>
 <br /> 
 
@@ -117,7 +117,7 @@ Active Directory Domain Services
 <img width="786" height="561" alt="Snapshot 11" src="https://github.com/user-attachments/assets/253fdd35-9758-4899-b327-a266c472b8fd" />
 </p>
 <p>
-Continue to click next on everything until Active directory is installed 
+Continue to click next on everything until Active Directory is installed. 
 </p>
 <br />  
 
@@ -125,9 +125,9 @@ Continue to click next on everything until Active directory is installed
 <img width="1513" height="800" alt="Snapshot 12" src="https://github.com/user-attachments/assets/17d2e392-d666-4711-b8e3-2254b3972fc5" />
 </p>
 <p>
-Now that we have Active Directory installed on our virtual machine, now we must promote 
+Now that we have Active Directory installed on our domain controller virtual machine, we must promote 
 the virtual machine to an actual domain controller. Go to the server manager and click on 
-the flag and then click "promote this server to domain controller" 
+the flag and then click "promote this server to domain controller". 
 </p>
 <br />  
 
@@ -143,8 +143,8 @@ Select "add new forest" and name this domain controller, "mydomain.com". You can
 <img width="747" height="679" alt="Snapshot 14" src="https://github.com/user-attachments/assets/06e46f7e-75bc-46a2-b9e5-b0a105148717" />
 </p>
 <p>
-When we log back in to our domain controller, we have to specify the domain we want to login to 
-and the account within that domain. Our domain name is mydomain.com, so we will login as such "mydomain.com\labuser". It is important to use "\" instead of "/". 
+When we log back in to our domain controller, we have to specify the domain we want to log in to 
+and the account within that domain. Our domain name is mydomain.com, so we will login like this, "mydomain.com\labuser". It is important to use "\" instead of "/". 
 </p>
 <br />  
 
@@ -152,9 +152,9 @@ and the account within that domain. Our domain name is mydomain.com, so we will 
 <img width="747" height="679" alt="Snapshot 15" src="https://github.com/user-attachments/assets/7a7dd114-0062-4de0-b99e-ef64d91df895" />
 </p>
 <p>
-We will now create a domain admin for our domain. We will allow this account to run administrative  task 
-on our domain. This is a huge deal, as an admin can effect hundreds of computers on a domain  
-To do this we will first need to create an organizational unit for employees and admins. Think of OU's as a folder that holds data in our domain. Go to the Windows start menu > "Windows administrative tools" and  select "Active Directory Users and Computers" 
+We will now create a domain admin for our domain. We will allow this account to run administrative tasks 
+on our domain. This is a huge deal, as an admin can affect thousands of computers on a domain.  
+To do this we will first need to create an organizational unit for employees and admins. Think of OU's as a folder that holds resources in our domain. Go to the Windows start menu > "Windows Administrative Tools" and  select "Active Directory Users and Computers". 
 </p>
 <br />  
 
@@ -163,7 +163,7 @@ To do this we will first need to create an organizational unit for employees and
 <img width="777" height="649" alt="Snapshot 17" src="https://github.com/user-attachments/assets/a0b7d390-b54a-475e-a762-46074e8d9cf0" />
 </p>
 <p>
-Right click on your domain > new > Organizational unit. Create an OU named _EMPLOYEES. Create another OU called _ADMINS  
+Right click on your domain > new > Organizational Unit. Create an OU named "_EMPLOYEES". Create another OU called "_ADMINS".  
 </p>
 <br />  
 
@@ -175,7 +175,7 @@ Right click on your domain > new > Organizational unit. Create an OU named _EMPL
 </p>
 <p>
 We can now create our admin account in the _ADMINS OU. Right click _ADMINS > new > user. 
-Feel out the info. Our admins name will be Jane Doe. At the end you see Jane Doe in the Admin OU. 
+Feel out the info. Our admin's name will be Jane Doe. At the end you will see Jane Doe in the _ADMINS OU. 
 </p>
 <br />  
 
@@ -186,7 +186,7 @@ Feel out the info. Our admins name will be Jane Doe. At the end you see Jane Doe
 <img width="424" height="577" alt="Snapshot 25" src="https://github.com/user-attachments/assets/432dc400-d8a2-492e-bccb-33e483c808fa" />
 </p>
 <p>
-Just because we put jane doe in the _ADMINS OU, doesn't mean she has admin permissions. We will have to add her to the built in domain admin group for her to have admin permissions. To do that, we will right click on her account and select properties. Click the member of the tab and click add. From there we will type in the domain admins group and add her to it. Jane Doe is now an admin for our domain. 
+Just because we put Jane Doe in the _ADMINS OU, doesn't mean she has admin permissions. We will have to add her to the built-in "domain admin" group for her to have admin permissions. To do that, we will right click on her account and select properties. Click the "member of" tab and click add. From there we will type in the "domain admins" and add her to it. Jane Doe is now an admin for our domain. 
 </p>
 <br />  
 
@@ -194,7 +194,7 @@ Just because we put jane doe in the _ADMINS OU, doesn't mean she has admin permi
 <img width="776" height="643" alt="Snapshot 26" src="https://github.com/user-attachments/assets/015359ad-484f-4f66-a376-fbf580de4595" /> 
 </p>
 <p>
-We will use Jane Doe to login back in. Jane Doe does not yet have permission to sign into the Domain Controller remotely yet. This is how we'll fix that. 
+We will use Jane Doe to log back in to the domain controller. Jane Doe does not yet have permission to sign into the domain controller remotely yet. This is how we'll fix that. 
 </p>
 <br />  
 
@@ -206,8 +206,8 @@ We will use Jane Doe to login back in. Jane Doe does not yet have permission to 
 <img width="436" height="493" alt="Snapshot 31" src="https://github.com/user-attachments/assets/ab15ed48-ed3b-43a9-ac7e-f2159319681a" />
 </p>
 <p>
-Log back in the domain controller with our default account of labuser. Open up Active Directory 
-users and computers again. Click on the built in OU and click remote desktop users. Click Add > Advance >find now and scroll down until you see the Jane Doe account and click it. Click and apply and Ok. 
+Log back in the domain controller with our default account of "labuser". Open up Active Directory 
+Users and Computers again. Click on the built-in OU "remote desktop users". Click Add > Advance > Find Now and scroll down until you see the Jane Doe account and click it. Click "apply" and "ok". 
 </p>
 <br />  
 
@@ -215,7 +215,7 @@ users and computers again. Click on the built in OU and click remote desktop use
 <img width="1213" height="951" alt="Snapshot 32" src="https://github.com/user-attachments/assets/cb65d340-570f-4b0d-97ef-0c01017c887d" />
 </p>
 <p>
-Restart your domain controller and login with the Jane Doe account. We are login to the domain controller account remotely with the jane doe account  
+Restart your domain controller and log in to it with the Jane Doe account. We are now logged in remotely to the domain controller with the Jane Doe account.  
 </p>
 <br />  
 
@@ -227,8 +227,8 @@ Restart your domain controller and login with the Jane Doe account. We are login
 <img width="350" height="212" alt="Snapshot 37" src="https://github.com/user-attachments/assets/b3304739-8bde-4a87-96d0-60c6f605a04c" />
 </p>
 <p>
-The next thing we will do is login client 1 and join it to our domain. Right click the start menu and select system > rename this pc advance > computer change tab > change > select domain and type the name of our domain. Client 1 is able to find the domain because the domain controller is its DNS server. You connect client 1 to the domain using the jane doe account.  
-You have to restart client 1 for the changes to apply  
+The next thing we will do is log in to the client VM and join it to our domain. Right click the start menu and select system > rename this pc advance > computer change tab > change > select domain and type the name of our domain. The client VM is able to find the domain because the domain controller is also it's DNS server. Connect the client to the domain using the Jane Doe account.  
+You have to restart the client for the changes to apply.  
 </p>
 <br />  
 
@@ -236,8 +236,8 @@ You have to restart client 1 for the changes to apply
 <img width="772" height="553" alt="Snapshot 38" src="https://github.com/user-attachments/assets/6d06f482-8933-4f57-a4d5-5e74a53d3350" />
 </p>
 <p>
-We will check on the domain controller if client 1 was added to active directory computers and 
-users. Under the computer OU, you should see client 1. 
+We will check on the domain controller to see if the client was added to Active Directory Computers and 
+Users. Under the computer OU, you should see the client. 
 </p>
 <br />  
 
@@ -245,7 +245,7 @@ users. Under the computer OU, you should see client 1.
 <img width="473" height="536" alt="Snapshot 39" src="https://github.com/user-attachments/assets/974bd0f8-a0ff-4873-8ed9-6d51f691b1e3" />
 </p>
 <p>
-You can double click client 1 and see info about it 
+You can double click the client and see info about it. 
 </p>
 <br />  
 
@@ -253,13 +253,13 @@ You can double click client 1 and see info about it
 <img width="766" height="542" alt="Snapshot 40" src="https://github.com/user-attachments/assets/df8bff44-1afa-4687-8af7-bdd01315d40f" />
 </p>
 <p>
-For this lab, we create an OU called _CLINETS and place Client 1 in there.
+For this lab, we will create an OU called "_CLINETS" and place our client in there.
 </p>
 <br />  
 
 <p>
-There you have it. We have our Active Direcorty Domain up and running on Azure. To see how we can actually manage accounts using this 
-Active Diretory Domain, go to this tutorial next:  
+There you have it. We have our Active Direcorty Domain up and running on Azure! To see how we can actually manage accounts using 
+Active Diretory, go to this tutorial next:  
   
 [Active Directory: Managing Accounts With Active Directory](https://github.com/JosephShamoon99/Managing-Accounts-With-Active-Directory-)
 </p>
